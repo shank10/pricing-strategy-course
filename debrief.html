@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workshop Debrief & AI in Product Management</title>
+<link rel="icon" type="image/png" href="assets/poorit-mark.png">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .cert{ background:#fffdf7; border:14px solid #0e1230; border-radius:8px; padding:44px; text-align:center; position:relative; box-shadow:var(--shadow-lg); }
+  .cert:before{ content:""; position:absolute; inset:10px; border:2px solid var(--gold); border-radius:4px; pointer-events:none; }
+  .cert h1{ font-size:2.4rem; color:#0e1230; }
+  .cert .name{ font-size:2.2rem; font-weight:800; color:var(--indigo); border-bottom:2px dashed #c9cde6; display:inline-block; padding:0 30px 6px; margin:10px 0; min-width:340px; }
+  .seal{ width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--amber));display:grid;place-items:center;margin:14px auto 0;color:#3a2a00;font-weight:800;box-shadow:0 8px 20px rgba(245,158,11,.4);}
+  .danger-box { background: rgba(220, 38, 38, 0.1); border: 1px solid #ef4444; border-radius: 12px; padding: 20px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="index.html" style="text-decoration:none"><span class="dot">₹</span> Pricing Workshop</a>
+  <span class="crumb">Final Debrief &amp; AI</span>
+  <span class="sep"></span>
+  <a class="crumb" href="index.html">Home</a>
+</div>
+
+<section class="hero" style="padding:44px 0 54px">
+  <div class="wrap">
+    <span class="kicker">Post-Mortem · 30 minutes</span>
+    <h1>The game is over. Now make it stick.</h1>
+    <p class="muted" style="max-width:60ch;font-size:1.1rem">Turn the chaos of the 5 market simulations into architectural frameworks you’ll carry into any product boardroom.</p>
+  </div>
+</section>
+
+<div class="wrap" style="padding:34px 0 60px">
+
+  <!-- THE 5 MODULE SYNTHESIS -->
+  <div class="card reveal">
+    <span class="kicker">Debrief · 10 min</span>
+    <h2 class="mt1">The Architectural Takeaways</h2>
+    <p class="muted">Tap each core lesson to review the mechanics behind the 5 simulations.</p>
+    <div class="grid g2 mt2" id="lessons"></div>
+    <div class="trainer"><span class="lbl">🎤 Trainer says</span> Ask the room: "Which of these 5 traps did your team fall into first? Did you trigger an SLA collapse in the Liquidity Engine, or cannibalize your SaaS Enterprise tier?"</div>
+  </div>
+
+  <!-- AI IN PRODUCT MANAGEMENT -->
+  <div class="card reveal mt3">
+    <span class="kicker">Modern PM Toolkit · 15 min</span>
+    <h2 class="mt1">AI in Pricing, Category, and Messaging</h2>
+    <p class="muted" style="max-width: 80ch;">As Product Managers, how should we leverage AI in our pricing strategies? The key is understanding the strict boundary between <strong>Quantitative Optimization (Machine Learning)</strong> and <strong>Qualitative Execution (LLMs)</strong>.</p>
+
+    <!-- THE TRAP -->
+    <div class="danger-box mt3 mb3">
+      <h3 style="color: #fca5a5; margin-top: 0;">❌ The LLM "Prompting" Trap</h3>
+      <p class="muted small mb0">
+        It is tempting to open ChatGPT and type: <em>"Act as a pricing strategist. My cost is ₹100, competitors charge ₹150. What should my price be?"</em> <strong>This is a dangerous oversimplification.</strong> LLMs are linguistic prediction engines; they do not calculate live market elasticity, margin waterfalls, or two-sided liquidity. Relying on an LLM prompt to dictate your pricing methodology dilutes the mathematical rigor required to protect a company's bottom line. LLMs cannot set your price.
+      </p>
+    </div>
+
+    <!-- THE REAL PM FRAMEWORK -->
+    <div class="grid g2 mt2">
+      <!-- MACHINE LEARNING -->
+      <div style="background: #faf9ff; border: 1px solid #e5e1ff; border-radius: 12px; padding: 24px;">
+        <h3 style="color: var(--indigo); margin-top: 0;">🧠 Machine Learning (The Math)</h3>
+        <p class="small muted mb2">Used for dynamic optimization, clustering, and predictive data modeling.</p>
+        
+        <ul style="padding-left: 18px; line-height: 1.6; font-size: 0.95rem; color: #475569;">
+          <li class="mb1"><strong>Dynamic Yield Management:</strong> (e.g., Uber, Swiggy) Using Reinforcement Learning to adjust prices second-by-second based on live geospatial supply and demand imbalances.</li>
+          <li class="mb1"><strong>Category Segmentation:</strong> Using unsupervised learning (like K-Means Clustering) to group customers based on usage telemetry to identify hidden WTP (Willingness to Pay) cohorts.</li>
+          <li><strong>Propensity to Churn:</strong> Predictive modeling to alert PMs when a proposed price hike is statistically likely to trigger a mass exodus of a specific customer profile.</li>
+        </ul>
+      </div>
+
+      <!-- LLMs -->
+      <div style="background: #faf9ff; border: 1px solid #e5e1ff; border-radius: 12px; padding: 24px;">
+        <h3 style="color: var(--indigo); margin-top: 0;">💬 Large Language Models (The Messaging)</h3>
+        <p class="small muted mb2">Used for synthesis, positioning, and value communication.</p>
+        
+        <ul style="padding-left: 18px; line-height: 1.6; font-size: 0.95rem; color: #475569;">
+          <li class="mb1"><strong>Value Proposition Tailoring:</strong> Once the ML model identifies a high-WTP cohort, PMs use LLMs to rapidly generate and A/B test marketing copy and packaging that justifies the premium price.</li>
+          <li class="mb1"><strong>Competitor Intelligence:</strong> Scraping and summarizing rival earnings calls and release notes to instantly map changes in the competitor's "Feature Fencing" strategy.</li>
+          <li><strong>Sentiment Analysis:</strong> Parsing millions of social media mentions and support tickets to gauge user backlash following a price increase or shrinkflation event.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trainer mt3"><span class="lbl">🎤 Trainer says</span> "Use Machine Learning to find the numbers. Use LLMs to find the words to justify those numbers."</div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="card reveal mt3">
+    <span class="kicker">Reflection · 5 min</span>
+    <h2 class="mt1">Three questions to take home</h2>
+    <ol style="font-size:1.05rem;line-height:1.9">
+      <li>In which of the 5 simulations did you experience the difference between simply <em>extracting margin</em> and actually <em>managing risk/liquidity</em>?</li>
+      <li>When the market shocked you (e.g., the Monsoon, or Supply Chain failure), did your team <b>react</b> mathematically, or did you <b>panic</b>? What’s the difference?</li>
+      <li>Where in your upcoming PM career — feature packaging, vendor negotiation, or category creation — will you apply the concept of psychological elasticity?</li>
+    </ol>
+  </div>
+
+  <!-- CERTIFICATE -->
+  <div class="card reveal mt3">
+    <span class="kicker">Wrap-up</span>
+    <h2 class="mt1">Your participation certificate</h2>
+    <p class="muted">Type a name and print or save as PDF (Print → Save as PDF).</p>
+    <div class="row mb2 no-print">
+      <input id="certName" type="text" placeholder="Participant name" style="max-width:340px" oninput="document.getElementById('cn').textContent=this.value||'Participant Name'">
+      <button class="btn" onclick="window.print()">🖨 Print / Save PDF</button>
+    </div>
+    <div class="cert" id="cert">
+      <div class="row" style="justify-content:center;gap:12px;align-items:center">
+        <span class="dot" style="width:52px;height:52px;border-radius:13px"></span>
+        <span style="font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink)">Poorit Technologies LLP</span>
+      </div>
+      <p class="kicker mt2" style="letter-spacing:.2em">Certificate of Participation</p>
+      <h1 style="margin:.2em 0">Pricing Strategy &amp; Business Simulation</h1>
+      <p class="muted">This certifies that</p>
+      <div class="name" id="cn">Participant Name</div>
+      <p class="muted" style="max-width:52ch;margin:10px auto">successfully completed the hands-on workshop on modern pricing strategy, customer economics, and competitive business simulation, demonstrating data-driven decision-making under real market pressure.</p>
+      <div class="seal">★</div>
+      <p class="small muted mt2">CHRIST (Deemed to be University) · Facilitated by Poorit Technologies LLP</p>
+    </div>
+  </div>
+
+  <div class="row mt3 no-print">
+    <a class="btn secondary" href="index.html">← Back to workshop home</a>
+    <a class="btn ghost" href="facilitator-guide.html">Facilitator Run-of-Show →</a>
+  </div>
+
+</div>
+
+<footer class="foot no-print"><div class="brand"><span class="dot">₹</span> Poorit Technologies LLP</div>Workshop Debrief · Pricing Strategy &amp; Business Simulation</footer>
+
+<script src="assets/app.js"></script>
+<script>
+// --- Updated Lessons for the 5 Modules ---
+var LESSONS=[
+  {e:'🚆',t:'1. Hardware to Services',d:'Risk shifting protects margins. In complex B2B, selling predictable outcomes (Power-by-the-Hour) creates an annuity that beats discounting hardware.'},
+  {e:'🛒',t:'2. Psychology > Math',d:'Consumers anchor heavily on price thresholds. Defend against inflation and private labels by deploying Price Pack Architecture (Shrinkflation) to maintain the optical price.'},
+  {e:'💼',t:'3. The Efficiency Trap',d:'In the age of AI, Time & Materials billing penalizes your own productivity. You must pivot to Fixed-Fee, outcome-based pricing to capture the financial value of automation.'},
+  {e:'☁️',t:'4. Feature Fencing',d:'Your SaaS packaging must force upgrades. Core features drive acquisition (Land), while security, compliance, and API access must be fenced off to drive monetization (Expand).'},
+  {e:'🚗',t:'5. Liquidity over Margin',d:'In two-sided marketplaces, an uncapped algorithmic surge will destroy your brand. Sometimes you must override the math and subsidize supply to maintain network reliability.'}
+];
+
+var box=document.getElementById('lessons');
+LESSONS.forEach(function(x){
+  var c=document.createElement('div'); c.className='card'; c.style.cursor='pointer'; c.style.background='#faf9ff';
+  c.innerHTML='<div class="row"><div style="font-size:1.6rem">'+x.e+'</div><h3 style="margin:0">'+x.t+'</h3></div><p class="muted small mt1 mb0 d" style="display:none">'+x.d+'</p>';
+  c.onclick=function(){ var d=c.querySelector('.d'); d.style.display=d.style.display==='none'?'block':'none'; };
+  box.appendChild(c);
+});
+
+// Assuming makeTimer exists in assets/app.js
+if(typeof makeTimer === 'function') {
+    makeTimer(30);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Simulator: The Efficiency Trap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen p-8 relative">
+
+    <div id="screen-1" class="block transition-opacity duration-500">
+        <header class="mb-8 border-b border-slate-700 pb-6">
+            <!-- BACK BUTTON -->
+            <div class="mb-6">
+                <a href="index_simulations.html" class="inline-block" title="Return to Simulations Hub">
+                    <img src="assets/poorit-mark.png" alt="Poorit Technologies" class="h-10 hover:opacity-80 transition-opacity">
+                </a>
+            </div>
+            
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold text-purple-400 mb-3">IT Services Bidding Desk</h1>
+                    <!-- INTEGRATED OBJECTIVE -->
+                    <p class="text-slate-300 text-sm max-w-4xl leading-relaxed mb-4 border-l-2 border-purple-500 pl-3">
+                        <strong>Objective:</strong> Understand the existential threat of Time & Materials (T&M) billing. Pivot to outcome-based, fixed-fee structures to capture margins in the age of hyper-automation and AI.
+                    </p>
+                    <p class="text-slate-500 text-xs">Phase 1: Build your T&M (Time & Materials) Resource Pyramid. Target: >45% Margin.</p>
+                </div>
+                <div class="text-right flex items-center justify-end space-x-4">
+                    <button onclick="resetSimulation()" class="text-sm text-slate-400 hover:text-white transition">↺ Reset Sliders</button>
+                    <span class="bg-purple-900 text-purple-300 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">Phase 1 of 3</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl h-fit">
+                <h2 class="text-xl font-semibold mb-6 border-b border-slate-600 pb-2">Staffing Mix (Headcount)</h2>
+                
+                <p class="text-xs text-slate-400 mb-6">Project Scope: 59,520 Complexity Points. Balance your team. Architects are fast but ruin margins. Juniors are slow but highly profitable.</p>
+
+                <!-- Architects -->
+                <div class="mb-6">
+                    <div class="flex justify-between mb-1">
+                        <label class="text-sm font-medium text-slate-300">Architects</label>
+                        <span id="val-arch" class="font-mono text-purple-400 font-bold">2</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-2">Cost: $100/hr | Bill: $180/hr</p>
+                    <input type="range" id="slider-arch" min="1" max="10" step="1" value="2" class="w-full accent-purple-500">
+                </div>
+
+                <!-- Seniors -->
+                <div class="mb-6">
+                    <div class="flex justify-between mb-1">
+                        <label class="text-sm font-medium text-slate-300">Senior Devs</label>
+                        <span id="val-senior" class="font-mono text-indigo-400 font-bold">5</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-2">Cost: $60/hr | Bill: $130/hr</p>
+                    <input type="range" id="slider-senior" min="0" max="20" step="1" value="5" class="w-full accent-indigo-500">
+                </div>
+
+                <!-- Juniors -->
+                <div class="mb-8 p-4 bg-slate-900 border border-slate-700 rounded-lg">
+                    <div class="flex justify-between mb-1">
+                        <label class="text-sm font-medium text-slate-300">Junior Devs (The Margin Engine)</label>
+                        <span id="val-junior" class="font-mono text-blue-400 font-bold">15</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-2">Cost: $30/hr | Bill: $90/hr</p>
+                    <input type="range" id="slider-junior" min="0" max="50" step="1" value="15" class="w-full accent-blue-500">
+                </div>
+
+                <button onclick="goToScreen2()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded transition duration-200 mt-4 shadow-lg shadow-purple-500/30">
+                    Lock Contract & Begin Project ➔
+                </button>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                        <h3 class="text-slate-400 text-sm">Blended Bill Rate</h3>
+                        <p id="kpi-rate" class="text-2xl font-mono mt-1 text-slate-100">$107 / hr</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                        <h3 class="text-slate-400 text-sm">Est. Timeline (Months)</h3>
+                        <p id="kpi-time" class="text-2xl font-mono mt-1 text-slate-100">12.0 Months</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+                        <h3 class="text-slate-400 text-sm">Gross Profit Margin</h3>
+                        <p id="kpi-margin" class="text-2xl font-mono mt-1 text-purple-400 font-bold">59.7%</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h3 class="text-lg font-semibold mb-4 text-slate-300">Resource Pyramid</h3>
+                        <canvas id="chart-pyramid" height="150"></canvas>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h3 class="text-lg font-semibold mb-2 text-slate-300">Financial Projection</h3>
+                        <p class="text-sm text-slate-400 mb-4">Total Contract Value (TCV)</p>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-slate-400">Projected Revenue</span><span id="fin-rev" class="font-mono text-white">$4.53M</span></div>
+                                <div class="w-full bg-slate-700 h-2 rounded"><div class="bg-blue-500 h-2 rounded w-full"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-slate-400">Projected Costs</span><span id="fin-cost" class="font-mono text-white">$1.82M</span></div>
+                                <div class="w-full bg-slate-700 h-2 rounded"><div id="bar-cost" class="bg-red-400 h-2 rounded w-[40%]"></div></div>
+                            </div>
+                            <div class="pt-2 border-t border-slate-600">
+                                <div class="flex justify-between font-bold"><span class="text-purple-400">Absolute Gross Profit</span><span id="fin-profit" class="font-mono text-purple-400">$2.71M</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: THE AI SHOCK -->
+    <div id="screen-2" class="hidden transition-opacity duration-500 flex flex-col items-center justify-center min-h-[80vh] relative">
+        <!-- BACK BUTTON (Left) -->
+        <div class="absolute top-0 left-0">
+            <a href="index_simulations.html" class="inline-block" title="Return to Simulations Hub">
+                <img src="assets/poorit-mark.png" alt="Poorit Technologies" class="h-10 hover:opacity-80 transition-opacity">
+            </a>
+        </div>
+        
+        <!-- Restart Button (Right) -->
+        <div class="absolute top-0 right-0">
+            <button onclick="resetSimulation()" class="text-sm text-cyan-500 hover:text-cyan-300 transition font-medium bg-cyan-950/50 px-4 py-2 rounded-lg border border-cyan-800">↺ Restart Simulation</button>
+        </div>
+
+        <div class="max-w-4xl text-center bg-cyan-950/40 border-2 border-cyan-600 p-12 rounded-3xl shadow-[0_0_80px_rgba(6,182,212,0.2)] mt-12">
+            <h1 class="text-7xl mb-6">🤖</h1>
+            <h2 class="text-5xl font-extrabold text-cyan-400 mb-6 tracking-wide">ENTERPRISE AI DEPLOYED</h2>
+            <p class="text-2xl text-slate-200 mb-10 leading-relaxed font-light">
+                Mid-project, your firm mandates the use of GenAI Coding Assistants across all teams. Developer efficiency skyrockets.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-left">
+                <div class="bg-cyan-900/30 p-6 rounded-xl border border-cyan-800">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">Architects</h3>
+                    <p class="text-slate-300">Design & architecture is hard to automate. Productivity boost: <strong class="text-white">+15%</strong></p>
+                </div>
+                <div class="bg-cyan-900/30 p-6 rounded-xl border border-cyan-800">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">Senior Devs</h3>
+                    <p class="text-slate-300">Debugging and complex logic generation speeds up. Boost: <strong class="text-white">+40%</strong></p>
+                </div>
+                <div class="bg-cyan-900/30 p-6 rounded-xl border border-cyan-800 border-b-4 border-b-cyan-400">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">Junior Devs</h3>
+                    <p class="text-slate-300">Boilerplate code and unit tests are completely automated. Boost: <strong class="text-white">+120%</strong></p>
+                </div>
+            </div>
+
+            <button onclick="goToScreen3()" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xl py-5 px-10 rounded-full transition duration-300 shadow-[0_0_30px_rgba(6,182,212,0.6)]">
+                View Impact on Your 12-Month Contract ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: THE EFFICIENCY TRAP -->
+    <div id="screen-3" class="hidden transition-opacity duration-500">
+        <header class="mb-8 border-b border-cyan-900 pb-4">
+            <!-- BACK BUTTON -->
+            <div class="mb-6">
+                <a href="index_simulations.html" class="inline-block" title="Return to Simulations Hub">
+                    <img src="assets/poorit-mark.png" alt="Poorit Technologies" class="h-10 hover:opacity-80 transition-opacity">
+                </a>
+            </div>
+            
+            <div class="flex justify-between items-end">
+                <div>
+                    <h1 class="text-3xl font-bold text-cyan-500">The Success Penalty</h1>
+                    <p class="text-slate-400 mt-2">You finished the project months ahead of schedule. Because you bill by the hour, you just destroyed your own revenue.</p>
+                </div>
+                <div class="text-right flex items-center justify-end space-x-4">
+                    <button onclick="resetSimulation()" class="text-sm text-slate-400 hover:text-white transition">↺ Restart</button>
+                    <span class="bg-cyan-900 text-cyan-300 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">Phase 3 of 3</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl h-fit">
+                <h2 class="text-xl font-semibold mb-6 border-b border-slate-600 pb-2">Contract Pivot</h2>
+                
+                <p class="text-sm text-slate-300 mb-6">Under Time & Materials, AI efficiency benefits the <strong class="text-cyan-400">Client</strong>. To capture the value of AI, you must change how you sell.</p>
+
+                <!-- Toggle -->
+                <div class="bg-slate-900 p-2 rounded-lg border border-slate-700 flex relative mb-8">
+                    <div id="toggle-bg" class="absolute top-2 left-2 w-[calc(50%-8px)] h-[calc(100%-16px)] bg-slate-700 rounded transition-all duration-300 z-0"></div>
+                    
+                    <button id="btn-tm" onclick="setContractType('tm')" class="flex-1 py-3 text-center z-10 font-bold text-white transition-colors">
+                        Hourly (T&M)
+                    </button>
+                    <button id="btn-fixed" onclick="setContractType('fixed')" class="flex-1 py-3 text-center z-10 font-bold text-slate-400 transition-colors">
+                        Fixed-Fee Outcome
+                    </button>
+                </div>
+
+                <div id="narrative-tm" class="block">
+                    <div class="p-4 bg-red-950/30 border border-red-800 rounded-lg">
+                        <h3 class="font-bold text-red-400 mb-2">🚨 The T&M Trap</h3>
+                        <p class="text-sm text-slate-300">Because your team is faster, they bill fewer hours. Your top-line revenue collapses. You just lost millions in absolute profit by doing a better job.</p>
+                    </div>
+                </div>
+
+                <div id="narrative-fixed" class="hidden">
+                    <div class="p-4 bg-emerald-950/30 border border-emerald-800 rounded-lg">
+                        <h3 class="font-bold text-emerald-400 mb-2">✅ The Value Pivot</h3>
+                        <p class="text-sm text-slate-300">You locked in the original projected revenue as a Fixed-Fee ($). When AI cuts the timeline, your costs drop drastically, but revenue stays the same. The AI efficiency flows straight to your margin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                        <h3 class="text-slate-400 text-sm">Actual Timeline</h3>
+                        <p id="s3-time" class="text-2xl font-mono mt-1 text-cyan-400">6.9 Months</p>
+                        <p class="text-xs text-slate-500 mt-1">Originally: <span id="s3-old-time">12.0</span> Months</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                        <h3 class="text-slate-400 text-sm">Actual Revenue</h3>
+                        <p id="s3-rev" class="text-2xl font-mono mt-1 text-red-400 font-bold">$2.60M</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                        <h3 class="text-slate-400 text-sm">Actual Gross Profit</h3>
+                        <p id="s3-profit" class="text-2xl font-mono mt-1 text-red-400 font-bold">$1.55M</p>
+                        <p class="text-xs text-slate-500 mt-1">Originally: <span id="s3-old-profit">$2.71M</span></p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <h3 class="text-lg font-semibold mb-4 text-slate-300">Financial Realities (Pre-AI vs Post-AI)</h3>
+                    <canvas id="chart-impact" height="120"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        const SCOPE_POINTS = 59520; 
+        const HRS_PER_MONTH = 160;
+
+        const ROLES = {
+            arch: { cost: 100, bill: 180, prod: 3, aiBoost: 1.15 },
+            senior: { cost: 60, bill: 130, prod: 2, aiBoost: 1.40 },
+            junior: { cost: 30, bill: 90, prod: 1, aiBoost: 2.20 }
+        };
+
+        let state = {
+            arch: 2, senior: 5, junior: 15,
+            preAi: { rev: 0, cost: 0, profit: 0, time: 0 },
+            postAi: { time: 0, cost: 0 },
+            contractType: 'tm' 
+        };
+
+        let chartPyramid, chartImpact;
+
+        function initCharts() {
+            const ctx1 = document.getElementById('chart-pyramid').getContext('2d');
+            chartPyramid = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Architects', 'Seniors', 'Juniors'],
+                    datasets: [{
+                        data: [2, 5, 15],
+                        backgroundColor: ['#c084fc', '#818cf8', '#60a5fa'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+                    scales: { x: { display: false }, y: { grid: { display: false }, ticks: { color: '#94a3b8' } } }
+                }
+            });
+
+            const ctx2 = document.getElementById('chart-impact').getContext('2d');
+            chartImpact = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Revenue', 'Costs', 'Absolute Profit'],
+                    datasets: [
+                        { label: 'Pre-AI Projection', data: [0, 0, 0], backgroundColor: '#475569', borderRadius: 4 },
+                        { label: 'Actual Post-AI', data: [0, 0, 0], backgroundColor: '#06b6d4', borderRadius: 4 }
+                    ]
+                },
+                options: {
+                    responsive: true, plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                    scales: {
+                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', callback: val => '$' + (val/1000000).toFixed(1) + 'M' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                    }
+                }
+            });
+        }
+
+        function calculatePhase1() {
+            state.arch = parseInt(document.getElementById('slider-arch').value);
+            state.senior = parseInt(document.getElementById('slider-senior').value);
+            state.junior = parseInt(document.getElementById('slider-junior').value);
+
+            document.getElementById('val-arch').innerText = state.arch;
+            document.getElementById('val-senior').innerText = state.senior;
+            document.getElementById('val-junior').innerText = state.junior;
+
+            const totalHc = state.arch + state.senior + state.junior;
+            if(totalHc === 0) return;
+
+            const teamPointsPerHour = (state.arch * ROLES.arch.prod) + (state.senior * ROLES.senior.prod) + (state.junior * ROLES.junior.prod);
+            const teamPointsPerMonth = teamPointsPerHour * HRS_PER_MONTH;
+            const months = SCOPE_POINTS / teamPointsPerMonth;
+
+            const totalBilledHours = months * totalHc * HRS_PER_MONTH;
+
+            const teamHourlyCost = (state.arch * ROLES.arch.cost) + (state.senior * ROLES.senior.cost) + (state.junior * ROLES.junior.cost);
+            const teamHourlyBill = (state.arch * ROLES.arch.bill) + (state.senior * ROLES.senior.bill) + (state.junior * ROLES.junior.bill);
+            
+            const blendedCost = teamHourlyCost / totalHc;
+            const blendedBill = teamHourlyBill / totalHc;
+            const marginPct = ((blendedBill - blendedCost) / blendedBill) * 100;
+
+            const totalRev = totalBilledHours * blendedBill;
+            const totalCost = totalBilledHours * blendedCost;
+            const profit = totalRev - totalCost;
+
+            state.preAi = { rev: totalRev, cost: totalCost, profit: profit, time: months };
+
+            document.getElementById('kpi-rate').innerText = '$' + blendedBill.toFixed(0) + ' / hr';
+            document.getElementById('kpi-time').innerText = months.toFixed(1) + ' Months';
+            document.getElementById('kpi-margin').innerText = marginPct.toFixed(1) + '%';
+            document.getElementById('kpi-margin').className = `text-2xl font-mono mt-1 font-bold ${marginPct < 45 ? 'text-red-400' : 'text-purple-400'}`;
+
+            document.getElementById('fin-rev').innerText = formatM(totalRev);
+            document.getElementById('fin-cost').innerText = formatM(totalCost);
+            document.getElementById('fin-profit').innerText = formatM(profit);
+
+            const costPct = (totalCost / totalRev) * 100;
+            document.getElementById('bar-cost').style.width = costPct + '%';
+
+            chartPyramid.data.datasets[0].data = [state.arch, state.senior, state.junior];
+            chartPyramid.update();
+        }
+
+        function calculatePostAI() {
+            const archProd = ROLES.arch.prod * ROLES.arch.aiBoost;
+            const seniorProd = ROLES.senior.prod * ROLES.senior.aiBoost;
+            const juniorProd = ROLES.junior.prod * ROLES.junior.aiBoost;
+
+            const newTeamPointsPerHour = (state.arch * archProd) + (state.senior * seniorProd) + (state.junior * juniorProd);
+            const newTeamPointsPerMonth = newTeamPointsPerHour * HRS_PER_MONTH;
+            
+            const newMonths = SCOPE_POINTS / newTeamPointsPerMonth;
+            state.postAi.time = newMonths;
+
+            const totalHc = state.arch + state.senior + state.junior;
+            const newTotalBilledHours = newMonths * totalHc * HRS_PER_MONTH;
+
+            const teamHourlyCost = (state.arch * ROLES.arch.cost) + (state.senior * ROLES.senior.cost) + (state.junior * ROLES.junior.cost);
+            const blendedCost = teamHourlyCost / totalHc;
+            state.postAi.cost = newTotalBilledHours * blendedCost;
+
+            const teamHourlyBill = (state.arch * ROLES.arch.bill) + (state.senior * ROLES.senior.bill) + (state.junior * ROLES.junior.bill);
+            const blendedBill = teamHourlyBill / totalHc;
+            state.postAi.tmRev = newTotalBilledHours * blendedBill;
+        }
+
+        function updateScreen3UI() {
+            document.getElementById('s3-time').innerText = state.postAi.time.toFixed(1) + ' Months';
+            document.getElementById('s3-old-time').innerText = state.preAi.time.toFixed(1);
+            document.getElementById('s3-old-profit').innerText = formatM(state.preAi.profit);
+
+            let actualRev, actualProfit;
+
+            if(state.contractType === 'tm') {
+                actualRev = state.postAi.tmRev;
+                actualProfit = actualRev - state.postAi.cost;
+                
+                document.getElementById('s3-rev').className = 'text-2xl font-mono mt-1 text-red-400 font-bold';
+                document.getElementById('s3-profit').className = 'text-2xl font-mono mt-1 text-red-400 font-bold';
+                chartImpact.data.datasets[1].backgroundColor = '#ef4444'; 
+            } else {
+                actualRev = state.preAi.rev; 
+                actualProfit = actualRev - state.postAi.cost;
+                
+                document.getElementById('s3-rev').className = 'text-2xl font-mono mt-1 text-emerald-400 font-bold';
+                document.getElementById('s3-profit').className = 'text-2xl font-mono mt-1 text-emerald-400 font-bold';
+                chartImpact.data.datasets[1].backgroundColor = '#10b981'; 
+            }
+
+            document.getElementById('s3-rev').innerText = formatM(actualRev);
+            document.getElementById('s3-profit').innerText = formatM(actualProfit);
+
+            chartImpact.data.datasets[0].data = [state.preAi.rev, state.preAi.cost, state.preAi.profit];
+            chartImpact.data.datasets[1].data = [actualRev, state.postAi.cost, actualProfit];
+            chartImpact.update();
+        }
+
+        function setContractType(type) {
+            state.contractType = type;
+            
+            const btnTm = document.getElementById('btn-tm');
+            const btnFixed = document.getElementById('btn-fixed');
+            const bg = document.getElementById('toggle-bg');
+            
+            if(type === 'tm') {
+                bg.style.left = '8px'; 
+                btnTm.classList.add('text-white'); btnTm.classList.remove('text-slate-400');
+                btnFixed.classList.remove('text-white'); btnFixed.classList.add('text-slate-400');
+                
+                document.getElementById('narrative-tm').classList.remove('hidden');
+                document.getElementById('narrative-fixed').classList.add('hidden');
+            } else {
+                bg.style.left = 'calc(50%)'; 
+                btnFixed.classList.add('text-white'); btnFixed.classList.remove('text-slate-400');
+                btnTm.classList.remove('text-white'); btnTm.classList.add('text-slate-400');
+                
+                document.getElementById('narrative-tm').classList.add('hidden');
+                document.getElementById('narrative-fixed').classList.remove('hidden');
+            }
+            updateScreen3UI();
+        }
+
+        function goToScreen2() {
+            if(((state.preAi.rev - state.preAi.cost) / state.preAi.rev) < 0.45) {
+                alert("Your Gross Margin is below 45%. You need to rely more on Junior developers to hit your profitability targets before the partners will approve this contract.");
+                return;
+            }
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-2').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function goToScreen3() {
+            calculatePostAI();
+            document.getElementById('screen-2').classList.add('hidden');
+            document.getElementById('screen-3').classList.remove('hidden');
+            window.scrollTo(0,0);
+            setContractType('tm'); 
+        }
+
+        function resetSimulation() {
+            document.getElementById('slider-arch').value = 2;
+            document.getElementById('slider-senior').value = 5;
+            document.getElementById('slider-junior').value = 15;
+            
+            document.getElementById('screen-2').classList.add('hidden');
+            document.getElementById('screen-3').classList.add('hidden');
+            document.getElementById('screen-1').classList.remove('hidden');
+            
+            calculatePhase1();
+            window.scrollTo(0,0);
+        }
+
+        function formatM(num) {
+            return '$' + (num/1000000).toFixed(2) + 'M';
+        }
+
+        document.getElementById('slider-arch').addEventListener('input', calculatePhase1);
+        document.getElementById('slider-senior').addEventListener('input', calculatePhase1);
+        document.getElementById('slider-junior').addEventListener('input', calculatePhase1);
+
+        window.onload = () => {
+            initCharts();
+            calculatePhase1();
+        };
+    </script>
+</body>
+</html>

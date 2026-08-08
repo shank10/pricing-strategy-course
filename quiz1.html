@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Check | Name That Strategy</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in { animation: fadeIn 0.4s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="pt-8 pb-6 px-6 border-b border-slate-800 bg-slate-950/50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="inline-block" title="Return to Course Homepage">
+                <img src="assets/poorit-mark.png" alt="Return Home" class="h-10 hover:opacity-80 transition-opacity">
+            </a>
+            <div class="text-right">
+                <span class="bg-amber-900 text-amber-300 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">Mid-Point Knowledge Check</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quiz Container -->
+    <main class="flex-grow flex items-center justify-center p-6">
+        <div class="max-w-4xl w-full">
+            
+            <!-- Progress Bar -->
+            <div class="mb-8 flex justify-between items-center text-sm font-bold text-slate-500 uppercase tracking-widest">
+                <span id="quiz-progress">Scenario 1 of 3</span>
+            </div>
+
+            <!-- Card -->
+            <div class="bg-slate-800 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden">
+                
+                <!-- Setup Section -->
+                <div class="p-10 border-b border-slate-700">
+                    <h2 id="scenario-title" class="text-3xl font-extrabold text-white mb-6">The Cinema Snack Counter</h2>
+                    <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-600 mb-6">
+                        <h3 class="text-sm font-bold text-amber-500 uppercase tracking-widest mb-2">The Setup</h3>
+                        <p id="scenario-setup" class="text-xl text-slate-300 leading-relaxed">
+                            A movie theater sells popcorn in three sizes: Small for ₹150, Medium for ₹250, and Large for ₹270.
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="text-4xl">🎤</div>
+                        <div>
+                            <h3 class="text-sm font-bold text-blue-400 uppercase tracking-widest mb-1">Cold-Call Prompt</h3>
+                            <p id="scenario-prompt" class="text-2xl font-semibold text-white italic">
+                                "What is the theater doing here? Why does the Medium even exist?"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Answer Section (Hidden by Default) -->
+                <div id="answer-section" class="hidden bg-slate-800 p-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/40 via-slate-800 to-slate-800">
+                    <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-widest mb-2">The Strategy</h3>
+                    <h4 id="answer-title" class="text-3xl font-bold text-emerald-300 mb-4">The Decoy Effect</h4>
+                    <p id="answer-desc" class="text-lg text-slate-300 leading-relaxed">
+                        The Medium is a decoy. It is deliberately priced so close to the Large that it makes the Large feel like an absolute bargain (just ₹20 more for double the popcorn!). It shifts the buyer's internal debate from "Do I want to spend ₹270 on popcorn?" to "Well, I'd be stupid not to upgrade."
+                    </p>
+                </div>
+
+                <!-- Controls -->
+                <div class="p-6 bg-slate-900 flex justify-between items-center border-t border-slate-700">
+                    <button onclick="revealAnswer()" id="btn-reveal" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-8 rounded-xl transition shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                        Reveal Strategy ➔
+                    </button>
+                    <button onclick="nextScenario()" id="btn-next" class="hidden bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl transition shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                        Next Scenario ➔
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const scenarios = [
+            {
+                title: "The Cinema Snack Counter",
+                setup: "A movie theater sells popcorn in three sizes: Small for ₹150, Medium for ₹250, and Large for ₹270.",
+                prompt: "What is the theater doing here? Why does the Medium even exist?",
+                answerTitle: "The Decoy Effect",
+                answerDesc: "The Medium is a decoy. It is deliberately priced so close to the Large that it makes the Large feel like an absolute bargain (just ₹20 more for double the popcorn!). It shifts the buyer's internal debate from 'Do I want to spend ₹270 on popcorn?' to 'Well, I'd be stupid not to upgrade.'"
+            },
+            {
+                title: "The PlayStation Console War",
+                setup: "Sony launches the PS5. The hardware costs them about $450 to manufacture. They sell the digital edition for $399 (taking a $50 loss on every single unit sold).",
+                prompt: "Why would Sony deliberately lose millions of dollars on launch day? What strategy is this?",
+                answerTitle: "Penetration & Ecosystem Lock-in",
+                answerDesc: "They are using penetration pricing to buy installed market share. Sony knows that once a player buys the console, they are locked into the PlayStation ecosystem for 5-7 years. Sony recoups the hardware loss exponentially through software sales, high-margin digital downloads, and recurring PS Plus subscription fees."
+            },
+            {
+                title: "The Apple Vision Pro",
+                setup: "Apple releases a mixed-reality headset priced at a staggering $3,499. It is heavy, has a short battery life, and lacks a deep app ecosystem.",
+                prompt: "Are they crazy? Who are they pricing this for, and what is the strategic play?",
+                answerTitle: "Price Skimming",
+                answerDesc: "Apple is actively trying NOT to sell this to everyone. They are skimming the absolute top layer of the market—wealthy early adopters, developers, and tech enthusiasts who are price-insensitive. The high price restricts volume (giving Apple time to fix supply chain and software bugs) while establishing an ultra-premium halo effect for when they eventually release a cheaper 'Vision Air' model."
+            }
+        ];
+
+        let currentIndex = 0;
+
+        const elProgress = document.getElementById('quiz-progress');
+        const elTitle = document.getElementById('scenario-title');
+        const elSetup = document.getElementById('scenario-setup');
+        const elPrompt = document.getElementById('scenario-prompt');
+        const elAnsSection = document.getElementById('answer-section');
+        const elAnsTitle = document.getElementById('answer-title');
+        const elAnsDesc = document.getElementById('answer-desc');
+        const btnReveal = document.getElementById('btn-reveal');
+        const btnNext = document.getElementById('btn-next');
+
+        function loadScenario(index) {
+            const data = scenarios[index];
+            elProgress.innerText = `Scenario ${index + 1} of ${scenarios.length}`;
+            elTitle.innerText = data.title;
+            elSetup.innerText = data.setup;
+            elPrompt.innerText = `"${data.prompt}"`;
+            
+            elAnsTitle.innerText = data.answerTitle;
+            elAnsDesc.innerText = data.answerDesc;
+
+            // Reset UI states
+            elAnsSection.classList.add('hidden');
+            elAnsSection.classList.remove('fade-in');
+            btnReveal.classList.remove('hidden');
+            btnNext.classList.add('hidden');
+        }
+
+        function revealAnswer() {
+            elAnsSection.classList.remove('hidden');
+            elAnsSection.classList.add('fade-in');
+            btnReveal.classList.add('hidden');
+            btnNext.classList.remove('hidden');
+
+            if (currentIndex === scenarios.length - 1) {
+                btnNext.innerText = "Finish & Return to Hub ➔";
+            }
+        }
+
+        function nextScenario() {
+            if (currentIndex < scenarios.length - 1) {
+                currentIndex++;
+                loadScenario(currentIndex);
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+
+        // Initialize first scenario
+        window.onload = () => loadScenario(0);
+    </script>
+</body>
+</html>

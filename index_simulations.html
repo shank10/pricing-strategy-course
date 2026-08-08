@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Pricing Strategy | Course Simulations</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .deck-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .deck-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen">
+
+    <!-- Hero Section -->
+    <header class="pt-12 pb-12 px-6 border-b border-slate-800 bg-slate-950/50">
+        
+        <!-- BACK BUTTON TO MAIN INDEX -->
+        <div class="max-w-7xl mx-auto mb-4">
+            <a href="index.html" class="inline-block" title="Return to Course Homepage">
+                <img src="assets/poorit-mark.png" alt="Return Home" class="h-10 hover:opacity-80 transition-opacity">
+            </a>
+        </div>
+
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-8 tracking-tight">
+                Product Pricing <span class="text-blue-500">Simulations</span>
+            </h1>
+            
+            <!-- 3-Line Objective -->
+            <div class="text-lg md:text-xl text-slate-400 leading-relaxed max-w-3xl mx-auto space-y-3 font-light">
+                <p>Master the frameworks of value capture across diverse business models and industries.</p>
+                <p>Transition from rigid cost-plus mechanics to dynamic, value-based pricing architectures.</p>
+                <p>Navigate real-world market shocks, psychological elasticity, and competitive threats in real-time.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Simulation Decks Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-2xl font-bold text-slate-300 mb-10 border-b border-slate-700 pb-2 inline-block">Interactive Workbenches</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Simulation 1 -->
+            <a href="index_complexProducts.html" class="deck-card bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden flex flex-col group block">
+                <div class="h-3 bg-blue-500 w-full"></div>
+                <div class="p-8 flex-1 flex flex-col text-center">
+                    <span class="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">Heavy Industry & B2B</span>
+                    <h3 class="text-2xl font-bold text-white mb-8 group-hover:text-blue-400 transition-colors">The 30-Year Bidding War</h3>
+                    
+                    <!-- Visual Product Images (Wikimedia) -->
+                    <div class="flex-1 flex items-center justify-center space-x-4 mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_hangar.jpg?width=400" alt="Aerospace" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/H%C5%BD_2044_between_Turcin_and_Sveti_Ilija.jpg?width=400" alt="Rail" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-center text-blue-500 text-sm font-semibold">
+                        Launch Simulation <span class="ml-2 group-hover:translate-x-1 transition-transform">➔</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Simulation 2 -->
+            <a href="index_FMCG.html" class="deck-card bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden flex flex-col group block">
+                <div class="h-3 bg-amber-500 w-full"></div>
+                <div class="p-8 flex-1 flex flex-col text-center">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">FMCG & Retail</span>
+                    <h3 class="text-2xl font-bold text-white mb-8 group-hover:text-amber-400 transition-colors">The Shelf Space Standoff</h3>
+                    
+                    <!-- Visual Product Images -->
+                    <div class="flex-1 flex items-center justify-center space-x-4 mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=400&q=80" alt="Supermarket Aisle" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80" alt="Shopping Basket" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-center text-amber-500 text-sm font-semibold">
+                        Launch Simulation <span class="ml-2 group-hover:translate-x-1 transition-transform">➔</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Simulation 3 -->
+            <a href="index_ITServices.html" class="deck-card bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden flex flex-col group block">
+                <div class="h-3 bg-purple-500 w-full"></div>
+                <div class="p-8 flex-1 flex flex-col text-center">
+                    <span class="text-purple-400 text-xs font-bold uppercase tracking-wider mb-2">Professional Services</span>
+                    <h3 class="text-2xl font-bold text-white mb-8 group-hover:text-purple-400 transition-colors">The Efficiency Trap</h3>
+                    
+                    <!-- Visual Product Images -->
+                    <div class="flex-1 flex items-center justify-center space-x-4 mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80" alt="IT Team" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80" alt="Servers" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-center text-purple-500 text-sm font-semibold">
+                        Launch Simulation <span class="ml-2 group-hover:translate-x-1 transition-transform">➔</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Simulation 4 -->
+            <a href="index_SaaS.html" class="deck-card bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden flex flex-col group block">
+                <div class="h-3 bg-indigo-500 w-full"></div>
+                <div class="p-8 flex-1 flex flex-col text-center">
+                    <span class="text-indigo-400 text-xs font-bold uppercase tracking-wider mb-2">B2B SaaS</span>
+                    <h3 class="text-2xl font-bold text-white mb-8 group-hover:text-indigo-400 transition-colors">The Feature Fencing Matrix</h3>
+                    
+                    <!-- Visual Product Images -->
+                    <div class="flex-1 flex items-center justify-center space-x-4 mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80" alt="Cloud Network" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80" alt="Data Dashboard" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-center text-indigo-500 text-sm font-semibold">
+                        Launch Simulation <span class="ml-2 group-hover:translate-x-1 transition-transform">➔</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Simulation 5 -->
+            <a href="index_DynamicPricing.html" class="deck-card bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden flex flex-col group block">
+                <div class="h-3 bg-cyan-500 w-full"></div>
+                <div class="p-8 flex-1 flex flex-col text-center">
+                    <span class="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-2">Two-Sided Marketplaces</span>
+                    <h3 class="text-2xl font-bold text-white mb-8 group-hover:text-cyan-400 transition-colors">The Liquidity Engine</h3>
+                    
+                    <!-- Visual Product Images -->
+                    <div class="flex-1 flex items-center justify-center space-x-4 mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=400&q=80" alt="Taxi" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                        <img src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?auto=format&fit=crop&w=400&q=80" alt="Delivery" class="h-28 w-36 object-cover rounded-lg shadow-md border border-slate-600">
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-center text-cyan-500 text-sm font-semibold">
+                        Launch Simulation <span class="ml-2 group-hover:translate-x-1 transition-transform">➔</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>
